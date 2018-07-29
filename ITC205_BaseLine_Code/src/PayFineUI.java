@@ -3,50 +3,54 @@ import java.util.Scanner;
 
 public class PayFineUI {
 
-	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
-	private PayFineControl control;
+	public static enum UiState{ INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+
+	private PayFineControl payFineControl;
 	private Scanner input;
-	private UI_STATE state;
+	private UiState state;
 
-	public PayFineUI(PayFineControl control) {
-		this.control = control;
+	
+	public PayFineUI(PayFineControl payFineControl) {
+		this.payFineControl = payFineControl;
 		input = new Scanner(System.in);
-		state = UI_STATE.INITIALISED;
-		control.setUI(this);
+		state = UiState.INITIALISED;
+		payFineControl.setUI(this);
 	}
-
-	public void setState(UI_STATE state) {
+	
+	
+	public void setState(UiState state) {
 		this.state = state;
 	}
 
-	public void run() {
+
+	public void Run() {
 		output("Pay Fine Use Case UI\n");
-
+		
 		while (true) {
-
+			
 			switch (state) {
-
+			
 			case READY:
 				String memberStr = input("Swipe member card (press <enter> to cancel): ");
 				if (memberStr.length() == 0) {
-					control.cancel();
+					payFineControl.cancel();
 					break;
 				}
 				try {
 					int memberId = Integer.valueOf(memberStr).intValue();
-					control.cardSwiped(memberId);
+					payFineControl.cardSwiped(memberId);
 				}
 				catch (NumberFormatException e) {
 					output("Invalid memberId");
 				}
 				break;
-
+				
 			case PAYING:
 				double amount = 0;
 				String amountStr = input("Enter amount (<Enter> cancels) : ");
 				if (amountStr.length() == 0) {
-					control.cancel();
+					payFineControl.cancel();
 					break;
 				}
 				try {
@@ -57,35 +61,37 @@ public class PayFineUI {
 					output("Amount must be positive");
 					break;
 				}
-				control.payFine(amount);
+				payFineControl.payFine(amount);
 				break;
-
+								
 			case CANCELLED:
 				output("Pay Fine process cancelled");
-				break;
+				return;
 
 			case COMPLETED:
 				output("Pay Fine process complete");
-				break;
+				return;
 
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + state);
-			}
-		}
+				throw new RuntimeException("FixBookUI : unhandled state :" + state);			
+			
+			}		
+		}		
 	}
 
 	private String input(String prompt) {
 		System.out.print(prompt);
 		return input.nextLine();
+	}	
+		
+	private void output(Object outputObject) {
+		System.out.println(outputObject);
+	}	
+
+	public void display(Object displayObject) {
+		output(displayObject);
 	}
 
-	private void output(Object object) {
-		System.out.println(object);
-	}
 
-	public void display(Object object) {
-		output(object);
-	}
 }
-
