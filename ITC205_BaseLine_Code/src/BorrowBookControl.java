@@ -3,7 +3,7 @@ import java.util.List;
 
 public class BorrowBookControl {
 	
-	private BorrowBookUI ui;
+	private BorrowBookUi ui;
 	
 	private library L;
 	private member M;
@@ -21,12 +21,12 @@ public class BorrowBookControl {
 	}
 	
 
-	public void setUI(BorrowBookUI ui) {
+	public void setUI(BorrowBookUi ui) {
 		if (!state.equals(CONTROL_STATE.INITIALISED)) 
 			throw new RuntimeException("BorrowBookControl: cannot call setUI except in INITIALISED state");
 			
 		this.ui = ui;
-		ui.setState(BorrowBookUI.UI_STATE.READY);
+		ui.setState(BorrowBookUi.UI_STATE.READY);
 		state = CONTROL_STATE.READY;		
 	}
 
@@ -42,12 +42,12 @@ public class BorrowBookControl {
 		}
 		if (L.memberCanBorrow(M)) {
 			PENDING = new ArrayList<>();
-			ui.setState(BorrowBookUI.UI_STATE.SCANNING);
+			ui.setState(BorrowBookUi.UI_STATE.SCANNING);
 			state = CONTROL_STATE.SCANNING; }
 		else 
 		{
 			ui.display("Member cannot borrow at this time");
-			ui.setState(BorrowBookUI.UI_STATE.RESTRICTED); }}
+			ui.setState(BorrowBookUi.UI_STATE.RESTRICTED); }}
 	
 	
 	public void Scanned(int bookId) {
@@ -85,7 +85,7 @@ public class BorrowBookControl {
 				ui.display(b.toString());
 			}
 			COMPLETED = new ArrayList<loan>();
-			ui.setState(BorrowBookUI.UI_STATE.FINALISING);
+			ui.setState(BorrowBookUi.UI_STATE.FINALISING);
 			state = CONTROL_STATE.FINALISING;
 		}
 	}
@@ -103,13 +103,13 @@ public class BorrowBookControl {
 		for (loan loan : COMPLETED) {
 			ui.display(loan.toString());
 		}
-		ui.setState(BorrowBookUI.UI_STATE.COMPLETED);
+		ui.setState(BorrowBookUi.UI_STATE.COMPLETED);
 		state = CONTROL_STATE.COMPLETED;
 	}
 
 	
 	public void cancel() {
-		ui.setState(BorrowBookUI.UI_STATE.CANCELLED);
+		ui.setState(BorrowBookUi.UI_STATE.CANCELLED);
 		state = CONTROL_STATE.CANCELLED;
 	}
 	
