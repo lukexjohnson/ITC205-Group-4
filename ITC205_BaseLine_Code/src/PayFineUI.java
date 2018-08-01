@@ -10,21 +10,18 @@ public class PayFineUI {
 	private Scanner input;
 	private UiState state;
 
-	
-	public PayFineUI(PayFineControl payFineControl) {
+	public payFineUi(PayFineControl payFineControl) {
 		this.payFineControl = payFineControl;
 		input = new Scanner(System.in);
 		state = UiState.INITIALISED;
-		payFineControl.setUI(this);
+		payFineControl.setUi(this);
 	}
-	
 	
 	public void setState(UiState state) {
 		this.state = state;
 	}
 
-
-	public void Run() {
+	public void run() {
 		output("Pay Fine Use Case UI\n");
 		
 		while (true) {
