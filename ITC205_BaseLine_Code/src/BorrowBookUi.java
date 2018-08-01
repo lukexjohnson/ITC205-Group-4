@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class BorrowBookUi {
 	
-	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
+	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, 
+		FINALISING, COMPLETED, CANCELLED };
 
 	private BorrowBookControl control;
 	private Scanner input;
@@ -56,7 +57,7 @@ public class BorrowBookUi {
 					int memberId = Integer.valueOf(memberStr).intValue();
 					control.Swiped(memberId);
 				}
-				catch (NumberFormatException e) {
+				catch (NumberFormatException exception) {
 					output("Invalid Member Id");
 				}
 				break;
@@ -78,7 +79,7 @@ public class BorrowBookUi {
 					int bookId = Integer.valueOf(bookStr).intValue();
 					control.Scanned(bookId);
 					
-				} catch (NumberFormatException e) {
+				} catch (NumberFormatException exception) {
 					output("Invalid Book Id");
 				} 
 				break;
@@ -112,6 +113,4 @@ public class BorrowBookUi {
 	public void display(Object object) {
 		output(object);		
 	}
-
-
 }
