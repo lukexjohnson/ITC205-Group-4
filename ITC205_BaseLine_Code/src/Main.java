@@ -153,7 +153,7 @@ public class Main {
 
 
 	private static void borrowBook() {
-		new BorrowBookUI(new BorrowBookControl()).run();		
+		new BorrowBookUi(new BorrowBookControl()).run();		
 	}
 
 
