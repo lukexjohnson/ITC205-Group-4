@@ -6,12 +6,14 @@ public class ReturnBookControl {
 	private ReturnBookControlState state;
 	private library library;
 	private loan currentLoan;
+
 	
 	public ReturnBookControl() {
 		this.library = library.INSTANCE();
 		state = ReturnBookControlState.INITIALISED;
 	}
-		
+
+	
 	public void setUI(ReturnBookUI ui) {
 		if (!state.equals(ReturnBookControlState.INITIALISED)) {
 			throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
@@ -21,6 +23,7 @@ public class ReturnBookControl {
 		state = ReturnBookControlState.READY;		
 	}
 
+	
 	public void bookScanned(int bookId) {
 		if (!state.equals(ReturnBookControlState.READY)) {
 			throw new RuntimeException("ReturnBookControl: cannot call bookScanned except in READY state");
@@ -51,6 +54,7 @@ public class ReturnBookControl {
 		state = ReturnBookControlState.INSPECTING;		
 	}
 
+	
 	public void scanningComplete() {
 		if (!state.equals(ReturnBookControlState.READY)) {
 			throw new RuntimeException("ReturnBookControl: cannot call scanningComplete except in READY state");
@@ -58,6 +62,7 @@ public class ReturnBookControl {
 		ui.setState(ReturnBookUI.UIState.COMPLETED);		
 	}
 
+	
 	public void dischargeLoan(boolean isDamaged) {
 		if (!state.equals(ReturnBookControlState.INSPECTING)) {
 			throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in INSPECTING state");
@@ -68,4 +73,5 @@ public class ReturnBookControl {
 		state = ReturnBookControlState.READY;				
 	}
 
+	
 }
