@@ -4,20 +4,20 @@ import java.util.Scanner;
 public class PayFineUI {
 
 
-	public static enum UiState{ INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+	public static enum UIState{ INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
 	private PayFineControl payFineControl;
 	private Scanner input;
-	private UiState state;
+	private UIState state;
 
-	public payFineUi(PayFineControl payFineControl) {
+	public payFineUI(PayFineControl payFineControl) {
 		this.payFineControl = payFineControl;
 		input = new Scanner(System.in);
-		state = UiState.INITIALISED;
-		payFineControl.setUi(this);
+		state = UIState.INITIALISED;
+		payFineControl.setUI(this);
 	}
 	
-	public void setState(UiState state) {
+	public void setState(UIState state) {
 		this.state = state;
 	}
 
@@ -89,6 +89,4 @@ public class PayFineUI {
 	public void display(Object displayObject) {
 		output(displayObject);
 	}
-
-
 }
