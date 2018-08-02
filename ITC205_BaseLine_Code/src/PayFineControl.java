@@ -13,13 +13,12 @@ public class PayFineControl {
 		state = ControlState.INITIALISED;
 	}
 	
-	
 	public void setUI(PayFineUI ui) {
 		if (!state.equals(ControlState.INITIALISED)) {
 			throw new RuntimeException("PayFineControl: cannot call setUI except in INITIALISED state");
 		}	
 		this.ui = ui;
-		ui.setState(PayFineUI.UiState.READY);
+		ui.setState(PayFineUI.UIState.READY);
 		state = ControlState.READY;		
 	}
 
@@ -34,12 +33,12 @@ public class PayFineControl {
 			return;
 		}
 		ui.display(member.toString());
-		ui.setState(PayFineUI.UiState.PAYING);
+		ui.setState(PayFineUI.UIState.PAYING);
 		state = ControlState.PAYING;
 	}
 	
 	public void cancel() {
-		ui.setState(PayFineUI.UiState.CANCELLED);
+		ui.setState(PayFineUI.UIState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}
 
@@ -52,9 +51,8 @@ public class PayFineControl {
 			ui.display(String.format("Change: $%.2f", change));
 		}
 		ui.display(member.toString());
-		ui.setState(PayFineUI.UiState.COMPLETED);
+		ui.setState(PayFineUI.UIState.COMPLETED);
 		state = ControlState.COMPLETED;
 		return change;
 	}
-	
 }
