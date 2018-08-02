@@ -13,6 +13,7 @@ public class PayFineControl {
 		state = ControlState.INITIALISED;
 	}
 	
+	
 	public void setUI(PayFineUI ui) {
 		if (!state.equals(ControlState.INITIALISED)) {
 			throw new RuntimeException("PayFineControl: cannot call setUI except in INITIALISED state");
@@ -22,6 +23,7 @@ public class PayFineControl {
 		state = ControlState.READY;		
 	}
 
+	
 	public void cardSwiped(int memberId) {
 		if (!state.equals(ControlState.READY)) {
 			throw new RuntimeException("PayFineControl: cannot call cardSwiped except in READY state");
@@ -37,11 +39,13 @@ public class PayFineControl {
 		state = ControlState.PAYING;
 	}
 	
+	
 	public void cancel() {
 		ui.setState(PayFineUI.UIState.CANCELLED);
 		state = ControlState.CANCELLED;
 	}
 
+	
 	public double payFine(double amount) {
 		if (!state.equals(ControlState.PAYING)) {
 			throw new RuntimeException("PayFineControl: cannot call payFine except in PAYING state");
@@ -55,4 +59,5 @@ public class PayFineControl {
 		state = ControlState.COMPLETED;
 		return change;
 	}
+	
 }
