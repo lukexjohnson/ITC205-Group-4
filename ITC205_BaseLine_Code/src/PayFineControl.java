@@ -8,7 +8,7 @@ public class PayFineControl {
 	private member member;;
 
 
-	public payFineControl() {
+	public PayFineControl() {
 		this.library = library.INSTANCE();
 		state = ControlState.INITIALISED;
 	}
