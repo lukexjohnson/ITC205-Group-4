@@ -4,25 +4,22 @@ import java.util.Scanner;
 public class PayFineUI {
 
 
-	public static enum UI_STATE { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
+	public static enum UIState{ INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
-	private PayFineControl control;
+	private PayFineControl payFineControl;
 	private Scanner input;
-	private UI_STATE state;
+	private UIState state;
 
-	
-	public PayFineUI(PayFineControl control) {
-		this.control = control;
+	public payFineUI(PayFineControl payFineControl) {
+		this.payFineControl = payFineControl;
 		input = new Scanner(System.in);
-		state = UI_STATE.INITIALISED;
-		control.setUI(this);
+		state = UIState.INITIALISED;
+		payFineControl.setUI(this);
 	}
 	
-	
-	public void setState(UI_STATE state) {
+	public void setState(UIState state) {
 		this.state = state;
 	}
-
 
 	public void run() {
 		output("Pay Fine Use Case UI\n");
@@ -32,14 +29,14 @@ public class PayFineUI {
 			switch (state) {
 			
 			case READY:
-				String memStr = input("Swipe member card (press <enter> to cancel): ");
-				if (memStr.length() == 0) {
-					control.cancel();
+				String memberStr = input("Swipe member card (press <enter> to cancel): ");
+				if (memberStr.length() == 0) {
+					payFineControl.cancel();
 					break;
 				}
 				try {
-					int memberId = Integer.valueOf(memStr).intValue();
-					control.cardSwiped(memberId);
+					int memberId = Integer.valueOf(memberStr).intValue();
+					payFineControl.cardSwiped(memberId);
 				}
 				catch (NumberFormatException e) {
 					output("Invalid memberId");
@@ -48,30 +45,30 @@ public class PayFineUI {
 				
 			case PAYING:
 				double amount = 0;
-				String amtStr = input("Enter amount (<Enter> cancels) : ");
-				if (amtStr.length() == 0) {
-					control.cancel();
+				String amountStr = input("Enter amount (<Enter> cancels) : ");
+				if (amountStr.length() == 0) {
+					payFineControl.cancel();
 					break;
 				}
 				try {
-					amount = Double.valueOf(amtStr).doubleValue();
+					amount = Double.valueOf(amountStr).doubleValue();
 				}
 				catch (NumberFormatException e) {}
 				if (amount <= 0) {
 					output("Amount must be positive");
 					break;
 				}
-				control.payFine(amount);
+				payFineControl.payFine(amount);
 				break;
 								
 			case CANCELLED:
 				output("Pay Fine process cancelled");
 				return;
-			
+
 			case COMPLETED:
 				output("Pay Fine process complete");
 				return;
-			
+
 			default:
 				output("Unhandled state");
 				throw new RuntimeException("FixBookUI : unhandled state :" + state);			
@@ -80,21 +77,16 @@ public class PayFineUI {
 		}		
 	}
 
-	
 	private String input(String prompt) {
 		System.out.print(prompt);
 		return input.nextLine();
 	}	
 		
-		
-	private void output(Object object) {
-		System.out.println(object);
+	private void output(Object outputObject) {
+		System.out.println(outputObject);
 	}	
-			
 
-	public void display(Object object) {
-		output(object);
+	public void display(Object displayObject) {
+		output(displayObject);
 	}
-
-
 }
