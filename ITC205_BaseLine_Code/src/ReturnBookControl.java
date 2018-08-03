@@ -1,8 +1,8 @@
 public class ReturnBookControl {
+	
+	private enum ReturnBookControlState { INITIALISED, READY, INSPECTING };
 
 	private ReturnBookUI ui;
-	private enum ReturnBookControlState { INITIALISED, READY, INSPECTING };
-	
 	private ReturnBookControlState state;
 	private library library;
 	private loan currentLoan;
