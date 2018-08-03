@@ -158,7 +158,7 @@ public class Main {
 
 
 	private static void returnBook() {
-		new ReturnBookUI(new ReturnBookControl()).Run();		
+		new ReturnBookUI(new ReturnBookControl()).run();		
 	}
 
 

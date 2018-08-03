@@ -3,18 +3,22 @@ import java.util.Scanner;
 
 public class ReturnBookUI {
 
-	public static enum UiState {INITIALISED, READY, INSPECTING, COMPLETED};
+	public static enum UIState { INITIALISED, READY, INSPECTING, COMPLETED };
+
 	private ReturnBookControl returnBookControl;
 	private Scanner input;
-	private UiState state;
+	private UIState state;
+
 	
 	public ReturnBookUI(ReturnBookControl returnBookControl) {
 		this.returnBookControl = returnBookControl;
 		input = new Scanner(System.in);
-		state = UiState.INITIALISED;
+		state = UIState.INITIALISED;
 		returnBookControl.setUI(this);
+
 	}
 
+	
 	public void run() {		
 		output("Return Book Use Case UI\n");
 		
@@ -42,9 +46,11 @@ public class ReturnBookUI {
 				break;
 				
 			case INSPECTING:
-				String ans = input("Is book damaged? (Y/N): ");
+				String answer = input("Is book damaged? (Y/N): ");
 				boolean isDamaged = false;
-				if (ans.toUpperCase().equals("Y")) {			
+
+				if (answer.toUpperCase().equals("Y")) {					
+
 					isDamaged = true;
 				}
 				returnBookControl.dischargeLoan(isDamaged);
@@ -59,22 +65,27 @@ public class ReturnBookUI {
 			}
 		}
 	}
+
 	
 	private String input(String prompt) {
 		System.out.print(prompt);		
 		return input.nextLine();
 	}	
-				
+
+	
 	private void output(Object outputObject) {
 		System.out.println(outputObject);
 	}
-			
+
+	
 	public void display(Object displayObject) {
 		output(displayObject);
 	}
 	
-	public void setState(UiState state) {
+
+	public void setState(UIState state) {
 		this.state = state;
 	}	
+
 	
 }
