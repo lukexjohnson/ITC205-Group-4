@@ -5,18 +5,18 @@ public class ReturnBookUI {
 
 	public static enum UIState { INITIALISED, READY, INSPECTING, COMPLETED };
 
-	private ReturnBookControl control;
+	private ReturnBookControl returnBookControl;
 	private Scanner input;
 	private UIState state;
 
 	
-	public ReturnBookUI(ReturnBookControl control) {
-		this.control = control;
+	public ReturnBookUI(ReturnBookControl returnBookControl) {
+		this.returnBookControl = returnBookControl;
 		input = new Scanner(System.in);
 		state = UIState.INITIALISED;
-		control.setUI(this);
-	}
+		returnBookControl.setUI(this);
 
+	}
 
 	public void run() {		
 		output("Return Book Use Case UI\n");
@@ -31,26 +31,28 @@ public class ReturnBookUI {
 			case READY:
 				String bookStr = input("Scan Book (<enter> completes): ");
 				if (bookStr.length() == 0) {
-					control.scanningComplete();
+				  returnBookControl.scanningComplete();
 				}
 				else {
 					try {
 						int bookId = Integer.valueOf(bookStr).intValue();
-						control.bookScanned(bookId);
+						returnBookControl.bookScanned(bookId);
 					}
 					catch (NumberFormatException e) {
 						output("Invalid bookId");
-					}					
+					}
 				}
-				break;				
+				break;
 				
 			case INSPECTING:
 				String answer = input("Is book damaged? (Y/N): ");
 				boolean isDamaged = false;
+
 				if (answer.toUpperCase().equals("Y")) {					
+
 					isDamaged = true;
 				}
-				control.dischargeLoan(isDamaged);
+				returnBookControl.dischargeLoan(isDamaged);
 			
 			case COMPLETED:
 				output("Return processing complete");
@@ -62,26 +64,23 @@ public class ReturnBookUI {
 			}
 		}
 	}
-
 	
 	private String input(String prompt) {
-		System.out.print(prompt);
+		System.out.print(prompt);		
 		return input.nextLine();
 	}	
-		
-		
-	private void output(Object object) {
-		System.out.println(object);
+				
+	private void output(Object outputObject) {
+		System.out.println(outputObject);
 	}
-	
 			
-	public void display(Object object) {
-		output(object);
+	public void display(Object displayObject) {
+		output(displayObject);
 	}
 	
+
 	public void setState(UIState state) {
 		this.state = state;
-	}
-
+	}	
 	
 }
