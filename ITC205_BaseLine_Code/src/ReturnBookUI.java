@@ -18,6 +18,7 @@ public class ReturnBookUI {
 
 	}
 
+	
 	public void run() {		
 		output("Return Book Use Case UI\n");
 		
@@ -64,16 +65,19 @@ public class ReturnBookUI {
 			}
 		}
 	}
+
 	
 	private String input(String prompt) {
 		System.out.print(prompt);		
 		return input.nextLine();
 	}	
-				
+
+	
 	private void output(Object outputObject) {
 		System.out.println(outputObject);
 	}
-			
+
+	
 	public void display(Object displayObject) {
 		output(displayObject);
 	}
@@ -82,5 +86,6 @@ public class ReturnBookUI {
 	public void setState(UIState state) {
 		this.state = state;
 	}	
+
 	
 }
