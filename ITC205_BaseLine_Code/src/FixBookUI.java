@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class FixBookUI {
 
 	public static enum UI_STATE { INITIALISED, READY, FIXING, COMPLETED };
