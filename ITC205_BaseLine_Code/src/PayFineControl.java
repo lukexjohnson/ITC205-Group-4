@@ -3,7 +3,6 @@ public class PayFineControl {
 	private PayFineUI ui;
 	private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 	private ControlState state;
-	
 	private library library;
 	private member member;;
 
