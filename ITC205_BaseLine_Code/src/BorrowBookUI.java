@@ -46,7 +46,6 @@ public class BorrowBookUI {
 				output("Borrowing Cancelled");
 				return;
 
-				
 			case READY:
 				String memberStr = input("Swipe member card (press <enter> to cancel): ");
 				if (memberStr.length() == 0) {
@@ -62,13 +61,11 @@ public class BorrowBookUI {
 				}
 				break;
 
-				
 			case RESTRICTED:
 				input("Press <any key> to cancel");
 				control.cancel();
 				break;
 			
-				
 			case SCANNING:
 				String bookStr = input("Scan Book (<enter> completes): ");
 				if (bookStr.length() == 0) {
@@ -84,7 +81,6 @@ public class BorrowBookUI {
 				} 
 				break;
 					
-				
 			case FINALISING:
 				String answer = input("Commit loans? (Y/N): ");
 				if (answer.toUpperCase().equals("N")) {
@@ -96,12 +92,10 @@ public class BorrowBookUI {
 				}
 				break;
 				
-				
 			case COMPLETED:
 				output("Borrowing Completed");
 				return;
 	
-				
 			default:
 				output("Unhandled state");
 				throw new RuntimeException("BorrowBookUI : unhandled state :" + state);			
@@ -111,6 +105,6 @@ public class BorrowBookUI {
 
 
 	public void display(Object object) {
-		output(object);		
+	    output(object);		
 	}
 }
