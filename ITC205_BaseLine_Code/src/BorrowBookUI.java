@@ -1,17 +1,17 @@
 import java.util.Scanner;
 
 
-public class BorrowBookUi {
+public class BorrowBookUI {
 	
 	public static enum UiState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, 
-		FINALISING, COMPLETED, CANCELLED };
+	    FINALISING, COMPLETED, CANCELLED };
 
 	private BorrowBookControl control;
 	private Scanner input;
 	private UiState state;
 
 	
-	public BorrowBookUi(BorrowBookControl control) {
+	public BorrowBookUI(BorrowBookControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
 		state = UiState.INITIALISED;
@@ -104,7 +104,7 @@ public class BorrowBookUi {
 				
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("BorrowBookUi : unhandled state :" + state);			
+				throw new RuntimeException("BorrowBookUI : unhandled state :" + state);			
 			}
 		}		
 	}
