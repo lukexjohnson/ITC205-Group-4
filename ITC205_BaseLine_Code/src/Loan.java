@@ -61,17 +61,17 @@ public class Loan implements Serializable {
 	}
 
 
-	public member Member() {
+	public member getMember() {
 		return member;
 	}
 
 
-	public book Book() {
+	public book getBook() {
 		return book;
 	}
 
 
-	public void Loan() {
+	public void dischargeLoan() {
 		state = LoanState.DISCHARGED;		
 	}
 
