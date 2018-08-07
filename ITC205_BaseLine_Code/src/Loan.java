@@ -3,36 +3,36 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class loan implements Serializable {
+public class Loan implements Serializable {
 	
-	public static enum LOAN_STATE { CURRENT, OVER_DUE, DISCHARGED };
+	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };
 	
 	private int ID;
 	private book B;
 	private member M;
 	private Date D;
-	private LOAN_STATE state;
+	private LoanState state;
 
 	
-	public loan(int loanId, book book, member member, Date dueDate) {
+	public Loan(int loanId, book book, member member, Date dueDate) {
 		this.ID = loanId;
 		this.B = book;
 		this.M = member;
 		this.D = dueDate;
-		this.state = LOAN_STATE.CURRENT;
+		this.state = LoanState.CURRENT;
 	}
 
 	
 	public void checkOverDue() {
-		if (state == LOAN_STATE.CURRENT &&
+		if (state == LoanState.CURRENT &&
 			Calendar.getInstance().Date().after(D)) {
-			this.state = LOAN_STATE.OVER_DUE;			
+			this.state = LoanState.OVER_DUE;			
 		}
 	}
 
 	
 	public boolean isOverDue() {
-		return state == LOAN_STATE.OVER_DUE;
+		return state == LoanState.OVER_DUE;
 	}
 
 	
@@ -72,7 +72,7 @@ public class loan implements Serializable {
 
 
 	public void Loan() {
-		state = LOAN_STATE.DISCHARGED;		
+		state = LoanState.DISCHARGED;		
 	}
 
 }
