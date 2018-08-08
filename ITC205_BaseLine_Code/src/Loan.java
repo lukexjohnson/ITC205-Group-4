@@ -49,15 +49,15 @@ public class Loan implements Serializable {
 	public String toString() {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("Loan:  ").append(loanID).append("\n")
+		StringBuilder buildString = new StringBuilder();
+		buildString.append("Loan:  ").append(loanID).append("\n")
 		  .append("  Borrower ").append(member.getId()).append(" : ")
 		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
 		  .append("  Book ").append(book.ID()).append(" : " )
 		  .append(book.Title()).append("\n")
 		  .append("  DueDate: ").append(simpleDateFormat.format(dueDate)).append("\n")
 		  .append("  State: ").append(state);		
-		return stringBuilder.toString();
+		return buildString.toString();
 	}
 
 
