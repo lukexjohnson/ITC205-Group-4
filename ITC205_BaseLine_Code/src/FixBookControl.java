@@ -5,7 +5,7 @@ public class FixBookControl {
 	private ControlState state;
 	private FixBookUI ui;
 	private library library;
-	private book currentBook;
+	private Book currentBook;
 
 
 	public FixBookControl() {
@@ -36,7 +36,7 @@ public class FixBookControl {
 			ui.display("Invalid bookId");
 			return;
 		}
-		if (!currentBook.Damaged()) {
+		if (!currentBook.isDamaged()) {
 			ui.display("\"Book has not been damaged");
 			return;
 		}

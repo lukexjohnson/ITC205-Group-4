@@ -10,9 +10,9 @@ public class BorrowBookControl {
 	private enum CONTROL_STATE { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 	private CONTROL_STATE state;
 	
-	private List<book> PENDING;
+	private List<Book> PENDING;
 	private List<Loan> COMPLETED;
-	private book B;
+	private Book B;
 	
 	
 	public BorrowBookControl() {
@@ -60,12 +60,12 @@ public class BorrowBookControl {
 			ui.display("Invalid bookId");
 			return;
 		}
-		if (!B.Available()) {
+		if (!B.available()) {
 			ui.display("Book cannot be borrowed");
 			return;
 		}
 		PENDING.add(B);
-		for (book B : PENDING) {
+		for (Book B : PENDING) {
 			ui.display(B.toString());
 		}
 		if (L.loansRemainingForMember(M) - PENDING.size() == 0) {
@@ -81,7 +81,7 @@ public class BorrowBookControl {
 		}
 		else {
 			ui.display("\nFinal Borrowing List");
-			for (book b : PENDING) {
+			for (Book b : PENDING) {
 				ui.display(b.toString());
 			}
 			COMPLETED = new ArrayList<Loan>();
@@ -95,7 +95,7 @@ public class BorrowBookControl {
 		if (!state.equals(CONTROL_STATE.FINALISING)) {
 			throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
 		}	
-		for (book b : PENDING) {
+		for (Book b : PENDING) {
 			Loan loan = L.issueLoan(b, M);
 			COMPLETED.add(loan);			
 		}
