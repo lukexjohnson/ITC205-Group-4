@@ -75,7 +75,8 @@ public class BorrowBookControl {
         for (book currentBook : pendingBooks) {
             ui.display(currentBook.toString());
         }
-        if (library.loansRemainingForMember(member) - pendingBooks.size() == 0) {
+        int booksRemaining = library.loansRemainingForMember(member) - pendingBooks.size();
+        if (booksRemaining == 0) {
             ui.display("Loan limit reached");
             completeBorrowing();
         }
