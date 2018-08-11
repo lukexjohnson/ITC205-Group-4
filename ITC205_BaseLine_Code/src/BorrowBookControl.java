@@ -12,7 +12,7 @@ public class BorrowBookControl {
     private ControlState state;
     private book currentBook;
     
-    private List<book> PENDING;
+    private List<book> pendingBooks;
     private List<loan> COMPLETED;
     
 
@@ -43,7 +43,7 @@ public class BorrowBookControl {
             return;
         }
         if (library.memberCanBorrow(member)) {
-            PENDING = new ArrayList<>();
+            pendingBooks = new ArrayList<>();
             ui.setState(BorrowBookUI.UIState.SCANNING);
             state = ControlState.SCANNING;
         } else {
@@ -67,11 +67,11 @@ public class BorrowBookControl {
             ui.display("Book cannot be borrowed");
             return;
         }
-        PENDING.add(currentBook);
-        for (book currentBook : PENDING) {
+        pendingBooks.add(currentBook);
+        for (book currentBook : pendingBooks) {
             ui.display(currentBook.toString());
         }
-        if (library.loansRemainingForMember(member) - PENDING.size() == 0) {
+        if (library.loansRemainingForMember(member) - pendingBooks.size() == 0) {
             ui.display("Loan limit reached");
             Complete();
         }
@@ -79,11 +79,11 @@ public class BorrowBookControl {
 
 
     public void Complete() {
-        if (PENDING.size() == 0) {
+        if (pendingBooks.size() == 0) {
             cancel();
         } else {
             ui.display("\nFinal Borrowing List");
-            for (book currentBook : PENDING) {
+            for (book currentBook : pendingBooks) {
                 ui.display(currentBook.toString());
             }
             COMPLETED = new ArrayList<loan>();
@@ -97,7 +97,7 @@ public class BorrowBookControl {
         if (!state.equals(ControlState.FINALISING)) {
             throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
         }
-        for (book currentBook : PENDING) {
+        for (book currentBook : pendingBooks) {
             loan loan = library.issueLoan(currentBook, member);
             COMPLETED.add(loan);
         }
