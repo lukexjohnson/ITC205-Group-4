@@ -80,7 +80,7 @@ public class BorrowBookControl {
 
     public void Complete() {
         if (pendingBooks.size() == 0) {
-            cancel();
+            cancelLoans();
         } else {
             ui.display("\nFinal Borrowing List");
             for (book currentBook : pendingBooks) {
@@ -110,7 +110,7 @@ public class BorrowBookControl {
     }
 
 
-    public void cancel() {
+    public void cancelLoans() {
         ui.setState(BorrowBookUI.UIState.CANCELLED);
         state = ControlState.CANCELLED;
     }
