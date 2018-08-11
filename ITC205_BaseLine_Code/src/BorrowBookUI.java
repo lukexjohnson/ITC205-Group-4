@@ -76,7 +76,7 @@ public class BorrowBookUI {
 				}
 				try {
 					int bookId = Integer.valueOf(bookStr).intValue();
-					control.Scanned(bookId);
+					control.bookScanned(bookId);
 					
 				} catch (NumberFormatException e) {
 					output("Invalid Book Id");
