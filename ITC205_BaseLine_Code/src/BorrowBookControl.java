@@ -73,12 +73,12 @@ public class BorrowBookControl {
         }
         if (library.loansRemainingForMember(member) - pendingBooks.size() == 0) {
             ui.display("Loan limit reached");
-            Complete();
+            completeBorrowing();
         }
     }
 
 
-    public void Complete() {
+    public void completeBorrowing() {
         if (pendingBooks.size() == 0) {
             cancelBorrowing();
         } else {

@@ -71,7 +71,7 @@ public class BorrowBookUI {
 			case SCANNING:
 				String bookStr = input("Scan Book (<enter> completes): ");
 				if (bookStr.length() == 0) {
-					control.Complete();
+					control.completeBorrowing();
 					break;
 				}
 				try {
