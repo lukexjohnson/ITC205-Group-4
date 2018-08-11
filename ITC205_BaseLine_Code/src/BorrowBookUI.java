@@ -49,7 +49,7 @@ public class BorrowBookUI {
 			case READY:
 				String memStr = input("Swipe member card (press <enter> to cancel): ");
 				if (memStr.length() == 0) {
-					control.cancelLoans();
+					control.cancelBorrowing();
 					break;
 				}
 				try {
@@ -64,7 +64,7 @@ public class BorrowBookUI {
 				
 			case RESTRICTED:
 				input("Press <any key> to cancel");
-				control.cancelLoans();
+				control.cancelBorrowing();
 				break;
 			
 				
@@ -87,7 +87,7 @@ public class BorrowBookUI {
 			case FINALISING:
 				String ans = input("Commit loans? (Y/N): ");
 				if (ans.toUpperCase().equals("N")) {
-					control.cancelLoans();
+					control.cancelBorrowing();
 					
 				} else {
 					control.commitLoans();
