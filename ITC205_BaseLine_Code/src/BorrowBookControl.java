@@ -4,18 +4,17 @@ import java.util.List;
 
 public class BorrowBookControl {
 
-    private BorrowBookUI ui;
-
-    private library library;
-    private member member;
-
     private enum ControlState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
 
+    private BorrowBookUI ui;
+    private library library;
+    private member member;
     private ControlState state;
-
+    private book currentBook;
+    
     private List<book> PENDING;
     private List<loan> COMPLETED;
-    private book B;
+    
 
 
     public BorrowBookControl() {
@@ -55,22 +54,22 @@ public class BorrowBookControl {
 
 
     public void Scanned(int bookId) {
-        B = null;
+        currentBook = null;
         if (!state.equals(ControlState.SCANNING)) {
             throw new RuntimeException("BorrowBookControl: cannot call bookScanned except in SCANNING state");
         }
-        B = library.Book(bookId);
-        if (B == null) {
+        currentBook = library.Book(bookId);
+        if (currentBook == null) {
             ui.display("Invalid bookId");
             return;
         }
-        if (!B.Available()) {
+        if (!currentBook.Available()) {
             ui.display("Book cannot be borrowed");
             return;
         }
-        PENDING.add(B);
-        for (book B : PENDING) {
-            ui.display(B.toString());
+        PENDING.add(currentBook);
+        for (book currentBook : PENDING) {
+            ui.display(currentBook.toString());
         }
         if (library.loansRemainingForMember(member) - PENDING.size() == 0) {
             ui.display("Loan limit reached");
@@ -84,8 +83,8 @@ public class BorrowBookControl {
             cancel();
         } else {
             ui.display("\nFinal Borrowing List");
-            for (book b : PENDING) {
-                ui.display(b.toString());
+            for (book currentBook : PENDING) {
+                ui.display(currentBook.toString());
             }
             COMPLETED = new ArrayList<loan>();
             ui.setState(BorrowBookUI.UIState.FINALISING);
@@ -98,8 +97,8 @@ public class BorrowBookControl {
         if (!state.equals(ControlState.FINALISING)) {
             throw new RuntimeException("BorrowBookControl: cannot call commitLoans except in FINALISING state");
         }
-        for (book b : PENDING) {
-            loan loan = library.issueLoan(b, member);
+        for (book currentBook : PENDING) {
+            loan loan = library.issueLoan(currentBook, member);
             COMPLETED.add(loan);
         }
         ui.display("Completed Loan Slip");
