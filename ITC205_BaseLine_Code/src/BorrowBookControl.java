@@ -13,7 +13,7 @@ public class BorrowBookControl {
     private book currentBook;
     
     private List<book> pendingBooks;
-    private List<loan> COMPLETED;
+    private List<loan> completedLoans;
     
 
 
@@ -86,7 +86,7 @@ public class BorrowBookControl {
             for (book currentBook : pendingBooks) {
                 ui.display(currentBook.toString());
             }
-            COMPLETED = new ArrayList<loan>();
+            completedLoans = new ArrayList<loan>();
             ui.setState(BorrowBookUI.UIState.FINALISING);
             state = ControlState.FINALISING;
         }
@@ -99,10 +99,10 @@ public class BorrowBookControl {
         }
         for (book currentBook : pendingBooks) {
             loan loan = library.issueLoan(currentBook, member);
-            COMPLETED.add(loan);
+            completedLoans.add(loan);
         }
         ui.display("Completed Loan Slip");
-        for (loan loan : COMPLETED) {
+        for (loan loan : completedLoans) {
             ui.display(loan.toString());
         }
         ui.setState(BorrowBookUI.UIState.COMPLETED);
