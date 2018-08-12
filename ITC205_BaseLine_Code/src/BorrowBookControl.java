@@ -25,10 +25,10 @@ public class BorrowBookControl {
 
 
     public void setUI(BorrowBookUI ui) {
-        if (!state.equals(ControlState.INITIALISED))
+        if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("BorrowBookControl:"
-                    + " cannot call setUI except in INITIALISED state");
-
+                + " cannot call setUI except in INITIALISED state");
+        }
         this.ui = ui;
         ui.setState(BorrowBookUI.UIState.READY);
         state = ControlState.READY;
@@ -36,10 +36,10 @@ public class BorrowBookControl {
 
 
     public void cardSwiped(int memberId) {
-        if (!state.equals(ControlState.READY))
+        if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("BorrowBookControl:"
-                    + " cannot call cardSwiped except in READY state");
-
+                + " cannot call cardSwiped except in READY state");
+        }
         member = library.getMember(memberId);
         if (member == null) {
             ui.display("Invalid memberId");
@@ -60,7 +60,7 @@ public class BorrowBookControl {
         currentBook = null;
         if (!state.equals(ControlState.SCANNING)) {
             throw new RuntimeException("BorrowBookControl:"
-                    + " cannot call bookScanned except in SCANNING state");
+                + " cannot call bookScanned except in SCANNING state");
         }
         currentBook = library.Book(bookId);
         if (currentBook == null) {
@@ -102,7 +102,7 @@ public class BorrowBookControl {
     public void commitLoans() {
         if (!state.equals(ControlState.FINALISING)) {
             throw new RuntimeException("BorrowBookControl:"
-                    + " cannot call commitLoans except in FINALISING state");
+                + " cannot call commitLoans except in FINALISING state");
         }
         for (book currentBook : pendingBooks) {
             loan loan = library.issueLoan(currentBook, member);
