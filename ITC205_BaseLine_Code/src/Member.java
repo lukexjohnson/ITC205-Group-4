@@ -12,7 +12,7 @@ public class Member implements Serializable {
     private String firstName;
     private String email;
     private int PhoneNo;
-    private int ID;
+    private int memberId;
     private double FINES;
 
     private Map<Integer, Loan> LNS;
@@ -23,7 +23,7 @@ public class Member implements Serializable {
         this.firstName = firstName;
         this.email = email;
         this.PhoneNo = phoneNo;
-        this.ID = id;
+        this.memberId = id;
 
         this.LNS = new HashMap<>();
     }
@@ -31,7 +31,7 @@ public class Member implements Serializable {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Member:  ").append(ID).append("\n").append("  Name:  ").append(lastName).append(", ").append(firstName)
+        sb.append("Member:  ").append(memberId).append("\n").append("  Name:  ").append(lastName).append(", ").append(firstName)
                 .append("\n").append("  Email: ").append(email).append("\n").append("  Phone: ").append(PhoneNo).append("\n")
                 .append(String.format("  Fines Owed :  $%.2f", FINES)).append("\n");
 
@@ -43,7 +43,7 @@ public class Member implements Serializable {
 
 
     public int getId() {
-        return ID;
+        return memberId;
     }
 
 
