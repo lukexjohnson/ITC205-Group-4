@@ -15,7 +15,7 @@ public class Member implements Serializable {
     private int memberId;
     private double fines;
 
-    private Map<Integer, Loan> LNS;
+    private Map<Integer, Loan> loans;
 
 
     public Member(String lastName, String firstName, String email, int phoneNo, int id) {
@@ -25,7 +25,7 @@ public class Member implements Serializable {
         this.PhoneNo = phoneNo;
         this.memberId = id;
 
-        this.LNS = new HashMap<>();
+        this.loans = new HashMap<>();
     }
 
 
@@ -35,7 +35,7 @@ public class Member implements Serializable {
                 .append("\n").append("  Email: ").append(email).append("\n").append("  Phone: ").append(PhoneNo).append("\n")
                 .append(String.format("  Fines Owed :  $%.2f", fines)).append("\n");
 
-        for (Loan loan : LNS.values()) {
+        for (Loan loan : loans.values()) {
             sb.append(loan).append("\n");
         }
         return sb.toString();
@@ -48,12 +48,12 @@ public class Member implements Serializable {
 
 
     public List<Loan> getLoans() {
-        return new ArrayList<Loan>(LNS.values());
+        return new ArrayList<Loan>(loans.values());
     }
 
 
     public int getNumberOfCurrentLoans() {
-        return LNS.size();
+        return loans.size();
     }
 
 
@@ -63,8 +63,8 @@ public class Member implements Serializable {
 
 
     public void takeOutLoan(Loan loan) {
-        if (!LNS.containsKey(loan.getId())) {
-            LNS.put(loan.getId(), loan);
+        if (!loans.containsKey(loan.getId())) {
+            loans.put(loan.getId(), loan);
         } else {
             throw new RuntimeException("Duplicate loan added to member");
         }
@@ -102,8 +102,8 @@ public class Member implements Serializable {
 
 
     public void dischargeLoan(Loan loan) {
-        if (LNS.containsKey(loan.getId())) {
-            LNS.remove(loan.getId());
+        if (loans.containsKey(loan.getId())) {
+            loans.remove(loan.getId());
         } else {
             throw new RuntimeException("No such loan held by member");
         }
