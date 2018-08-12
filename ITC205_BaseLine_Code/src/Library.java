@@ -98,7 +98,7 @@ public class Library implements Serializable {
     }
 
 
-    private int nextMID() {
+    private int nextMemberId() {
         return memberId++;
     }
 
@@ -124,7 +124,7 @@ public class Library implements Serializable {
 
 
     public Member addMember(String lastName, String firstName, String email, int phoneNo) {
-        Member member = new Member(lastName, firstName, email, phoneNo, nextMID());
+        Member member = new Member(lastName, firstName, email, phoneNo, nextMemberId());
         members.put(member.getMemberId(), member);
         return member;
     }
