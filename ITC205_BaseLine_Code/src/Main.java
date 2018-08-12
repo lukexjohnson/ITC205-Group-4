@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 		output("");
-		for (Loan loan : LIB.CurrentLoans()) {
+		for (Loan loan : LIB.getCurrentLoans()) {
 			output(loan + "\n");
 		}		
 	}
