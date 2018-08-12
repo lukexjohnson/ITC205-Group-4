@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class library implements Serializable {
+public class Library implements Serializable {
 	
 	private static final String LIBRARY_FILE = "library.obj";
 	private static final int LOAN_LIMIT = 2;
@@ -22,7 +22,7 @@ public class library implements Serializable {
 	private static final double MAX_FINES_OWED = 5.0;
 	private static final double DAMAGE_FEE = 2.0;
 	
-	private static library self;
+	private static Library self;
 	private int BID;
 	private int MID;
 	private int LID;
@@ -35,7 +35,7 @@ public class library implements Serializable {
 	private Map<Integer, book> damagedBooks;
 	
 
-	private library() {
+	private Library() {
 		catalog = new HashMap<>();
 		members = new HashMap<>();
 		loans = new HashMap<>();
@@ -47,13 +47,13 @@ public class library implements Serializable {
 	}
 
 	
-	public static synchronized library INSTANCE() {		
+	public static synchronized Library INSTANCE() {		
 		if (self == null) {
 			Path path = Paths.get(LIBRARY_FILE);			
 			if (Files.exists(path)) {	
 				try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
 			    
-					self = (library) lof.readObject();
+					self = (Library) lof.readObject();
 					Calendar.getInstance().setDate(self.loadDate);
 					lof.close();
 				}
@@ -61,7 +61,7 @@ public class library implements Serializable {
 					throw new RuntimeException(e);
 				}
 			}
-			else self = new library();
+			else self = new Library();
 		}
 		return self;
 	}

@@ -4,7 +4,7 @@ public class PayFineControl {
 	
 	private PayFineUI ui;
 	private ControlState state;
-	private library library;
+	private Library library;
 	private Member member;
 
 

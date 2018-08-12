@@ -4,7 +4,7 @@ public class ReturnBookControl {
 
 	private ReturnBookUI ui;
 	private ReturnBookControlState state;
-	private library library;
+	private Library library;
 	private Loan currentLoan;
 
 	

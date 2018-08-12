@@ -4,7 +4,7 @@ public class FixBookControl {
 	
 	private ControlState state;
 	private FixBookUI ui;
-	private library library;
+	private Library library;
 	private book currentBook;
 
 
