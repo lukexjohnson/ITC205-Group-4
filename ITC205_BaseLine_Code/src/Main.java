@@ -44,7 +44,7 @@ public class Main {
 			CAL = Calendar.getInstance();
 			SDF = new SimpleDateFormat("dd/MM/yyyy");
 	
-			for (Member m : LIB.Members()) {
+			for (Member m : LIB.getMembers()) {
 				output(m);
 			}
 			output(" ");
@@ -145,7 +145,7 @@ public class Main {
 
 	private static void listMembers() {
 		output("");
-		for (Member member : LIB.Members()) {
+		for (Member member : LIB.getMembers()) {
 			output(member + "\n");
 		}		
 	}
