@@ -11,7 +11,7 @@ public class Member implements Serializable {
     private String lastName;
     private String firstName;
     private String email;
-    private int PhoneNo;
+    private int phoneNo;
     private int memberId;
     private double fines;
 
@@ -22,7 +22,7 @@ public class Member implements Serializable {
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;
-        this.PhoneNo = phoneNo;
+        this.phoneNo = phoneNo;
         this.memberId = id;
 
         this.currentLoans = new HashMap<>();
@@ -33,7 +33,7 @@ public class Member implements Serializable {
         StringBuilder buildString = new StringBuilder();
         buildString.append("Member:  ").append(memberId).append("\n").append("  Name:  ")
             .append(lastName).append(", ").append(firstName).append("\n").append("  Email: ")
-            .append(email).append("\n").append("  Phone: ").append(PhoneNo).append("\n")
+            .append(email).append("\n").append("  Phone: ").append(phoneNo).append("\n")
             .append(String.format("  Fines Owed :  $%.2f", fines)).append("\n");
 
         for (Loan loan : currentLoans.values()) {
