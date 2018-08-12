@@ -15,7 +15,7 @@ public class Member implements Serializable {
     private int memberId;
     private double fines;
 
-    private Map<Integer, Loan> loans;
+    private Map<Integer, Loan> currentLoans;
 
 
     public Member(String lastName, String firstName, String email, int phoneNo, int id) {
@@ -25,7 +25,7 @@ public class Member implements Serializable {
         this.PhoneNo = phoneNo;
         this.memberId = id;
 
-        this.loans = new HashMap<>();
+        this.currentLoans = new HashMap<>();
     }
 
 
@@ -35,7 +35,7 @@ public class Member implements Serializable {
                 .append("\n").append("  Email: ").append(email).append("\n").append("  Phone: ").append(PhoneNo).append("\n")
                 .append(String.format("  Fines Owed :  $%.2f", fines)).append("\n");
 
-        for (Loan loan : loans.values()) {
+        for (Loan loan : currentLoans.values()) {
             buildString.append(loan).append("\n");
         }
         return buildString.toString();
@@ -48,12 +48,12 @@ public class Member implements Serializable {
 
 
     public List<Loan> getLoans() {
-        return new ArrayList<Loan>(loans.values());
+        return new ArrayList<Loan>(currentLoans.values());
     }
 
 
     public int getNumberOfCurrentLoans() {
-        return loans.size();
+        return currentLoans.size();
     }
 
 
@@ -63,8 +63,8 @@ public class Member implements Serializable {
 
 
     public void takeOutLoan(Loan loan) {
-        if (!loans.containsKey(loan.getId())) {
-            loans.put(loan.getId(), loan);
+        if (!currentLoans.containsKey(loan.getId())) {
+            currentLoans.put(loan.getId(), loan);
         } else {
             throw new RuntimeException("Duplicate loan added to member");
         }
@@ -102,8 +102,8 @@ public class Member implements Serializable {
 
 
     public void dischargeLoan(Loan loan) {
-        if (loans.containsKey(loan.getId())) {
-            loans.remove(loan.getId());
+        if (currentLoans.containsKey(loan.getId())) {
+            currentLoans.remove(loan.getId());
         } else {
             throw new RuntimeException("No such loan held by member");
         }
