@@ -25,7 +25,7 @@ public class Library implements Serializable {
 
     private static Library self;
     private int bookId;
-    private int MID;
+    private int memberId;
     private int LID;
     private Date loadDate;
 
@@ -43,7 +43,7 @@ public class Library implements Serializable {
         currentLoans = new HashMap<>();
         damagedBooks = new HashMap<>();
         bookId = 1;
-        MID = 1;
+        memberId = 1;
         LID = 1;
     }
 
@@ -87,7 +87,7 @@ public class Library implements Serializable {
 
 
     public int MemberID() {
-        return MID;
+        return memberId;
     }
 
 
@@ -97,7 +97,7 @@ public class Library implements Serializable {
 
 
     private int nextMID() {
-        return MID++;
+        return memberId++;
     }
 
 
