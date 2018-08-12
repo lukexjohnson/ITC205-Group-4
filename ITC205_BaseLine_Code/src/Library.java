@@ -58,8 +58,8 @@ public class Library implements Serializable {
                     self = (Library) lof.readObject();
                     Calendar.getInstance().setDate(self.loadDate);
                     lof.close();
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+                } catch (Exception exception) {
+                    throw new RuntimeException(exception);
                 }
             } else
                 self = new Library();
@@ -76,8 +76,8 @@ public class Library implements Serializable {
                 lof.writeObject(self);
                 lof.flush();
                 lof.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            } catch (Exception exception) {
+                throw new RuntimeException(exception);
             }
         }
     }
