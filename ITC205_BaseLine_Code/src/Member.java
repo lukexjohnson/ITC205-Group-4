@@ -42,7 +42,7 @@ public class Member implements Serializable {
     }
 
 
-    public int getId() {
+    public int getMemberId() {
         return memberId;
     }
 
