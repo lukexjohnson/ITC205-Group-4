@@ -235,9 +235,10 @@ public class Library implements Serializable {
 
 
     public void repairBook(book currentBook) {
-        if (damagedBooks.containsKey(currentBook.ID())) {
+        int currentBookId = currentBook.ID();
+        if (damagedBooks.containsKey(currentBookId)) {
             currentBook.Repair();
-            damagedBooks.remove(currentBook.ID());
+            damagedBooks.remove(currentBookId);
         } else {
             throw new RuntimeException("Library: repairBook: book is not damaged");
         }
