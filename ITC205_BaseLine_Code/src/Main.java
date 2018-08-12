@@ -48,7 +48,7 @@ public class Main {
 				output(m);
 			}
 			output(" ");
-			for (book b : LIB.Books()) {
+			for (book b : LIB.getBooks()) {
 				output(b);
 			}
 						
@@ -136,7 +136,7 @@ public class Main {
 
 	private static void listBooks() {
 		output("");
-		for (book book : LIB.Books()) {
+		for (book book : LIB.getBooks()) {
 			output(book + "\n");
 		}		
 	}
