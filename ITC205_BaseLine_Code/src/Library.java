@@ -52,7 +52,8 @@ public class Library implements Serializable {
         if (self == null) {
             Path path = Paths.get(libraryFile);
             if (Files.exists(path)) {
-                try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(libraryFile));) {
+                try (ObjectInputStream lof 
+                    = new ObjectInputStream(new FileInputStream(libraryFile));) {
 
                     self = (Library) lof.readObject();
                     Calendar.getInstance().setDate(self.loadDate);
@@ -70,7 +71,8 @@ public class Library implements Serializable {
     public static synchronized void SAVE() {
         if (self != null) {
             self.loadDate = Calendar.getInstance().Date();
-            try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
+            try (ObjectOutputStream lof 
+                = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
                 lof.writeObject(self);
                 lof.flush();
                 lof.close();
