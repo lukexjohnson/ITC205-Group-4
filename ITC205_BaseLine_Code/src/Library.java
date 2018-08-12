@@ -16,7 +16,7 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class Library implements Serializable {
 
-    private static final String LIBRARY_FILE = "library.obj";
+    private static final String libraryFile = "library.obj";
     private static final int LOAN_LIMIT = 2;
     private static final int LOAN_PERIOD = 2;
     private static final double FINE_PER_DAY = 1.0;
@@ -50,9 +50,9 @@ public class Library implements Serializable {
 
     public static synchronized Library INSTANCE() {
         if (self == null) {
-            Path path = Paths.get(LIBRARY_FILE);
+            Path path = Paths.get(libraryFile);
             if (Files.exists(path)) {
-                try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(LIBRARY_FILE));) {
+                try (ObjectInputStream lof = new ObjectInputStream(new FileInputStream(libraryFile));) {
 
                     self = (Library) lof.readObject();
                     Calendar.getInstance().setDate(self.loadDate);
@@ -70,7 +70,7 @@ public class Library implements Serializable {
     public static synchronized void SAVE() {
         if (self != null) {
             self.loadDate = Calendar.getInstance().Date();
-            try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(LIBRARY_FILE));) {
+            try (ObjectOutputStream lof = new ObjectOutputStream(new FileOutputStream(libraryFile));) {
                 lof.writeObject(self);
                 lof.flush();
                 lof.close();
