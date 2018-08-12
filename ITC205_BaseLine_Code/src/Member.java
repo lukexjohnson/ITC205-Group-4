@@ -30,15 +30,15 @@ public class Member implements Serializable {
 
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Member:  ").append(memberId).append("\n").append("  Name:  ").append(lastName).append(", ").append(firstName)
+        StringBuilder buildString = new StringBuilder();
+        buildString.append("Member:  ").append(memberId).append("\n").append("  Name:  ").append(lastName).append(", ").append(firstName)
                 .append("\n").append("  Email: ").append(email).append("\n").append("  Phone: ").append(PhoneNo).append("\n")
                 .append(String.format("  Fines Owed :  $%.2f", fines)).append("\n");
 
         for (Loan loan : loans.values()) {
-            sb.append(loan).append("\n");
+            buildString.append(loan).append("\n");
         }
-        return sb.toString();
+        return buildString.toString();
     }
 
 
