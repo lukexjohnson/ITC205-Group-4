@@ -68,7 +68,7 @@ public class Library implements Serializable {
     }
 
 
-    public static synchronized void SAVE() {
+    public static synchronized void saveToLibraryFile() {
         if (self != null) {
             self.loadDate = Calendar.getInstance().Date();
             try (ObjectOutputStream lof 
