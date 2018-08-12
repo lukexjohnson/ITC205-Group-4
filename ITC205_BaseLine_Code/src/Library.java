@@ -133,8 +133,10 @@ public class Library implements Serializable {
 
 
     public book addBook(String author, String title, String callNo) {
-        book book = new book(author, title, callNo, nextBookId());
-        catalog.put(book.ID(), book);
+        int nextBookId = nextBookId();
+        book book = new book(author, title, callNo, nextBookId);
+        int bookId = book.ID();
+        catalog.put(bookId, book);
         return book;
     }
 
