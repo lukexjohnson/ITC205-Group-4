@@ -47,13 +47,13 @@ public class BorrowBookUI {
 				return;
 
 			case READY:
-				String memStr = input("Swipe member card (press <enter> to cancel): ");
-				if (memStr.length() == 0) {
+				String memberStr = input("Swipe member card (press <enter> to cancel): ");
+				if (memberStr.length() == 0) {
 					control.cancelBorrowing();
 					break;
 				}
 				try {
-					int memberId = Integer.valueOf(memStr).intValue();
+					int memberId = Integer.valueOf(memberStr).intValue();
 					control.cardSwiped(memberId);
 				}
 				catch (NumberFormatException exception) {
