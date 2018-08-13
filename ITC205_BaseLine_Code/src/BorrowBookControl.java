@@ -15,7 +15,6 @@ public class BorrowBookControl {
     
     private List<Book> pendingBooks;
     private List<Loan> completedLoans;
-    
 
 
     public BorrowBookControl() {
