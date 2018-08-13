@@ -11,10 +11,10 @@ public class BorrowBookControl {
     private library library;
     private member member;
     private ControlState state;
-    private book currentBook;
+    private Book currentBook;
     
-    private List<book> pendingBooks;
-    private List<loan> completedLoans;
+    private List<Book> pendingBooks;
+    private List<Loan> completedLoans;
     
 
 
@@ -67,12 +67,12 @@ public class BorrowBookControl {
             ui.display("Invalid bookId");
             return;
         }
-        if (!currentBook.Available()) {
+        if (!currentBook.available()) {
             ui.display("Book cannot be borrowed");
             return;
         }
         pendingBooks.add(currentBook);
-        for (book currentBook : pendingBooks) {
+        for (Book currentBook : pendingBooks) {
             ui.display(currentBook.toString());
         }
         int booksRemaining = library.loansRemainingForMember(member) - pendingBooks.size();
@@ -89,10 +89,10 @@ public class BorrowBookControl {
             cancelBorrowing();
         } else {
             ui.display("\nFinal Borrowing List");
-            for (book currentBook : pendingBooks) {
+            for (Book currentBook : pendingBooks) {
                 ui.display(currentBook.toString());
             }
-            completedLoans = new ArrayList<loan>();
+            completedLoans = new ArrayList<Loan>();
             ui.setState(BorrowBookUI.UIState.FINALISING);
             state = ControlState.FINALISING;
         }
@@ -104,12 +104,12 @@ public class BorrowBookControl {
             throw new RuntimeException("BorrowBookControl:"
                 + " cannot call commitLoans except in FINALISING state");
         }
-        for (book currentBook : pendingBooks) {
-            loan loan = library.issueLoan(currentBook, member);
+        for (Book currentBook : pendingBooks) {
+            Loan loan = library.issueLoan(currentBook, member);
             completedLoans.add(loan);
         }
         ui.display("Completed Loan Slip");
-        for (loan loan : completedLoans) {
+        for (Loan loan : completedLoans) {
             ui.display(loan.toString());
         }
         ui.setState(BorrowBookUI.UIState.COMPLETED);

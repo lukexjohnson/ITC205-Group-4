@@ -28,11 +28,11 @@ public class library implements Serializable {
 	private int LID;
 	private Date loadDate;
 	
-	private Map<Integer, book> catalog;
+	private Map<Integer, Book> catalog;
 	private Map<Integer, member> members;
-	private Map<Integer, loan> loans;
-	private Map<Integer, loan> currentLoans;
-	private Map<Integer, book> damagedBooks;
+	private Map<Integer, Loan> loans;
+	private Map<Integer, Loan> currentLoans;
+	private Map<Integer, Book> damagedBooks;
 	
 
 	private library() {
@@ -112,13 +112,13 @@ public class library implements Serializable {
 	}
 
 
-	public List<book> Books() {		
-		return new ArrayList<book>(catalog.values()); 
+	public List<Book> Books() {		
+		return new ArrayList<Book>(catalog.values()); 
 	}
 
 
-	public List<loan> CurrentLoans() {
-		return new ArrayList<loan>(currentLoans.values());
+	public List<Loan> CurrentLoans() {
+		return new ArrayList<Loan>(currentLoans.values());
 	}
 
 
@@ -129,9 +129,9 @@ public class library implements Serializable {
 	}
 
 	
-	public book Add_book(String a, String t, String c) {		
-		book b = new book(a, t, c, nextBID());
-		catalog.put(b.ID(), b);		
+	public Book Add_book(String a, String t, String c) {		
+		Book b = new Book(a, t, c, nextBID());
+		catalog.put(b.id(), b);		
 		return b;
 	}
 
@@ -143,7 +143,7 @@ public class library implements Serializable {
 	}
 
 	
-	public book Book(int bookId) {
+	public Book Book(int bookId) {
 		if (catalog.containsKey(bookId)) 
 			return catalog.get(bookId);		
 		return null;
@@ -162,7 +162,7 @@ public class library implements Serializable {
 		if (member.getFinesOwed() >= MAX_FINES_OWED) 
 			return false;
 				
-		for (loan loan : member.getLoans()) 
+		for (Loan loan : member.getLoans()) 
 			if (loan.isOverDue()) 
 				return false;
 			
@@ -175,18 +175,18 @@ public class library implements Serializable {
 	}
 
 	
-	public loan issueLoan(book book, member member) {
+	public Loan issueLoan(Book book, member member) {
 		Date dueDate = Calendar.getInstance().getDueDate(LOAN_PERIOD);
-		loan loan = new loan(nextLID(), book, member, dueDate);
+		Loan loan = new Loan(nextLID(), book, member, dueDate);
 		member.takeOutLoan(loan);
-		book.Borrow();
+		book.isBorrowed();
 		loans.put(loan.getId(), loan);
-		currentLoans.put(book.ID(), loan);
+		currentLoans.put(book.id(), loan);
 		return loan;
 	}
 	
 	
-	public loan getLoanByBookId(int bookId) {
+	public Loan getLoanByBookId(int bookId) {
 		if (currentLoans.containsKey(bookId)) {
 			return currentLoans.get(bookId);
 		}
@@ -194,7 +194,7 @@ public class library implements Serializable {
 	}
 
 	
-	public double calculateOverDueFine(loan loan) {
+	public double calculateOverDueFine(Loan loan) {
 		if (loan.isOverDue()) {
 			long daysOverDue = Calendar.getInstance().getDaysDifference(loan.getDueDate());
 			double fine = daysOverDue * FINE_PER_DAY;
@@ -204,35 +204,35 @@ public class library implements Serializable {
 	}
 
 
-	public void dischargeLoan(loan currentLoan, boolean isDamaged) {
-		member member = currentLoan.Member();
-		book book  = currentLoan.Book();
+	public void dischargeLoan(Loan currentLoan, boolean isDamaged) {
+		member member = currentLoan.getMember();
+		Book book  = currentLoan.getBook();
 		
 		double overDueFine = calculateOverDueFine(currentLoan);
 		member.addFine(overDueFine);	
 		
 		member.dischargeLoan(currentLoan);
-		book.Return(isDamaged);
+		book.isReturned(isDamaged);
 		if (isDamaged) {
 			member.addFine(DAMAGE_FEE);
-			damagedBooks.put(book.ID(), book);
+			damagedBooks.put(book.id(), book);
 		}
-		currentLoan.Loan();
-		currentLoans.remove(book.ID());
+		currentLoan.dischargeLoan();
+		currentLoans.remove(book.id());
 	}
 
 
 	public void checkCurrentLoans() {
-		for (loan loan : currentLoans.values()) {
+		for (Loan loan : currentLoans.values()) {
 			loan.checkOverDue();
 		}		
 	}
 
 
-	public void repairBook(book currentBook) {
-		if (damagedBooks.containsKey(currentBook.ID())) {
-			currentBook.Repair();
-			damagedBooks.remove(currentBook.ID());
+	public void repairBook(Book currentBook) {
+		if (damagedBooks.containsKey(currentBook.id())) {
+			currentBook.isRepaired();
+			damagedBooks.remove(currentBook.id());
 		}
 		else {
 			throw new RuntimeException("Library: repairBook: book is not damaged");

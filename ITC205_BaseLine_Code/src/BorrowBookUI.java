@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class BorrowBookUI {
 	
-	public static enum UIState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, FINALISING, COMPLETED, CANCELLED };
+	public static enum UIState { INITIALISED, READY, RESTRICTED, SCANNING, IDENTIFIED, 
+	    FINALISING, COMPLETED, CANCELLED };
 
 	private BorrowBookControl control;
 	private Scanner input;
@@ -45,7 +46,6 @@ public class BorrowBookUI {
 				output("Borrowing Cancelled");
 				return;
 
-				
 			case READY:
 				String memStr = input("Swipe member card (press <enter> to cancel): ");
 				if (memStr.length() == 0) {
@@ -56,18 +56,16 @@ public class BorrowBookUI {
 					int memberId = Integer.valueOf(memStr).intValue();
 					control.cardSwiped(memberId);
 				}
-				catch (NumberFormatException e) {
+				catch (NumberFormatException exception) {
 					output("Invalid Member Id");
 				}
 				break;
 
-				
 			case RESTRICTED:
 				input("Press <any key> to cancel");
 				control.cancelBorrowing();
 				break;
 			
-				
 			case SCANNING:
 				String bookStr = input("Scan Book (<enter> completes): ");
 				if (bookStr.length() == 0) {
@@ -78,29 +76,25 @@ public class BorrowBookUI {
 					int bookId = Integer.valueOf(bookStr).intValue();
 					control.bookScanned(bookId);
 					
-				} catch (NumberFormatException e) {
+				} catch (NumberFormatException exception) {
 					output("Invalid Book Id");
 				} 
 				break;
 					
-				
 			case FINALISING:
-				String ans = input("Commit loans? (Y/N): ");
-				if (ans.toUpperCase().equals("N")) {
-					control.cancelBorrowing();
-					
+				String answer = input("Commit loans? (Y/N): ");
+				if (answer.toUpperCase().equals("N")) {
+				    control.cancelBorrowing();
 				} else {
 					control.commitLoans();
 					input("Press <any key> to complete ");
 				}
 				break;
 				
-				
 			case COMPLETED:
 				output("Borrowing Completed");
 				return;
 	
-				
 			default:
 				output("Unhandled state");
 				throw new RuntimeException("BorrowBookUI : unhandled state :" + state);			
@@ -110,8 +104,6 @@ public class BorrowBookUI {
 
 
 	public void display(Object object) {
-		output(object);		
+	    output(object);		
 	}
-
-
 }

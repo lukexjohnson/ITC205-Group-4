@@ -3,22 +3,22 @@ import java.util.Scanner;
 
 public class FixBookUI {
 
-	public static enum UI_STATE { INITIALISED, READY, FIXING, COMPLETED };
+	public static enum UIState { INITIALISED, READY, FIXING, COMPLETED };
 
 	private FixBookControl control;
 	private Scanner input;
-	private UI_STATE state;
+	private UIState state;
 
 	
 	public FixBookUI(FixBookControl control) {
 		this.control = control;
 		input = new Scanner(System.in);
-		state = UI_STATE.INITIALISED;
+		state = UIState.INITIALISED;
 		control.setUI(this);
 	}
 
 
-	public void setState(UI_STATE state) {
+	public void setState(UIState state) {
 		this.state = state;
 	}
 
@@ -47,9 +47,9 @@ public class FixBookUI {
 				break;	
 				
 			case FIXING:
-				String ans = input("Fix Book? (Y/N) : ");
+				String answer = input("Fix Book? (Y/N) : ");
 				boolean fix = false;
-				if (ans.toUpperCase().equals("Y")) {
+				if (answer.toUpperCase().equals("Y")) {
 					fix = true;
 				}
 				control.fixBook(fix);
@@ -61,11 +61,9 @@ public class FixBookUI {
 			
 			default:
 				output("Unhandled state");
-				throw new RuntimeException("FixBookUI : unhandled state :" + state);			
-			
+				throw new RuntimeException("FixBookUI : unhandled state :" + state);
 			}		
 		}
-		
 	}
 
 	
@@ -83,6 +81,4 @@ public class FixBookUI {
 	public void display(Object object) {
 		output(object);
 	}
-	
-	
 }
