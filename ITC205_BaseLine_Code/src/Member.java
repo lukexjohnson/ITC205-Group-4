@@ -64,7 +64,7 @@ public class Member implements Serializable {
 
 
     public void takeOutLoan(Loan loan) {
-        int loanId = loan.getId();
+        int loanId = loan.getLoanId();
         if (!currentLoans.containsKey(loanId)) {
             currentLoans.put(loanId, loan);
         } else {
@@ -104,7 +104,7 @@ public class Member implements Serializable {
 
 
     public void dischargeLoan(Loan loan) {
-        int loanId = loan.getId();
+        int loanId = loan.getLoanId();
         if (currentLoans.containsKey(loanId)) {
             currentLoans.remove(loanId);
         } else {
