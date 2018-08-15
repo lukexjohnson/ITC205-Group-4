@@ -1,5 +1,6 @@
 public class PayFineControl {
 	
+  //File ready for Static review
 	private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 	
 	private PayFineUI ui;

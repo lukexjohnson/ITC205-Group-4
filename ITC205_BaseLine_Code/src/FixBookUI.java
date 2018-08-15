@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-
+//File ready for Static review
 public class FixBookUI {
 
 	public static enum UIState { INITIALISED, READY, FIXING, COMPLETED };

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-
+//File ready for Static review
 public class PayFineUI {
 
 	public static enum UIState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };

@@ -2,6 +2,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//File ready for Static review
 @SuppressWarnings("serial")
 public class Loan implements Serializable {
 	

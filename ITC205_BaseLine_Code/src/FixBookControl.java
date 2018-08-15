@@ -1,5 +1,6 @@
 public class FixBookControl {
 	
+  //File ready for Static review
 	private enum ControlState { INITIALISED, READY, FIXING };
 	
 	private ControlState state;
