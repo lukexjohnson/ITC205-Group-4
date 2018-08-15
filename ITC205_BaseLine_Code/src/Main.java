@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 	
 	private static Scanner takeInput;
-	private static library library;
+	private static Library library;
 	private static String libraryMenu;
 	private static Calendar calendar;
 	private static SimpleDateFormat simpleDateFormat;
@@ -40,16 +40,16 @@ public class Main {
 	public static void main(String[] args) {		
 	    try {
 	        takeInput = new Scanner(System.in);
-	        library = library.INSTANCE(); // change library.INSTANCE to Library.INSTANCE
+	        library = library.getInstance(); // change library.INSTANCE to Library.INSTANCE
 	        calendar = Calendar.getInstance();
 	        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-	        for (member m : library.Members()) {
-	            output(m);
+	        for (Member member : library.getMembers()) {
+	            output(member);
 			}
 	        output(" ");
-	        for (Book b : library.Books()) {
-	            output(b);
+	        for (Book book : library.getBooks()) {
+	            output(book);
 			}
 
 	        libraryMenu = getMenu();
@@ -108,12 +108,12 @@ public class Main {
 				    break;
 
 				default: 
-				    output("\nInvalid option\n");
-				    break;
-			    }
-
-	            library.SAVE();
-	        }
+					output("\nInvalid option\n");
+					break;
+				}
+				
+				Library.saveToLibraryFile();
+			}			
 		} catch (RuntimeException e) {
 		    output(e);
 		}
@@ -127,7 +127,7 @@ public class Main {
 
 	private static void listCurrentLoans() {
 	    output("");
-	    for (Loan loan : library.CurrentLoans()) {
+	    for (Loan loan : library.getCurrentLoans()) {
 	        output(loan + "\n");
 	    }
 	}
@@ -135,7 +135,7 @@ public class Main {
 
 	private static void listBooks() {
 	    output("");
-	    for (Book book : library.Books()) {
+	    for (Book book : library.getBooks()) {
 	        output(book + "\n");
 	    }
 	}
@@ -143,7 +143,7 @@ public class Main {
 
 	private static void listMembers() {
 	    output("");
-	    for (member member : library.Members()) {
+	    for (Member member : library.getMembers()) {
 	        output(member + "\n");
 	    }
 	}
@@ -178,23 +178,23 @@ public class Main {
 
 
 	private static void addBook() {
-	    String author = input("Enter author: ");
-	    String title  = input("Enter title: ");
-	    String callNo = input("Enter call number: ");
-	    Book book = library.Add_book(author, title, callNo);
-	    output("\n" + book + "\n");
+		String author = input("Enter author: ");
+		String title  = input("Enter title: ");
+		String callNo = input("Enter call number: ");
+		Book book = library.addBook(author, title, callNo);
+		output("\n" + book + "\n");
 	}
 
 
 	private static void addMember() {
-	    try {
-		    String lastName = input("Enter last name: ");
-		    String firstName  = input("Enter first name: ");
-		    String email = input("Enter email: ");
-		    int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
-		    member member = library.Add_mem(lastName, firstName, email, phoneNo);
-		    output("\n" + member + "\n");
-
+		try {
+			String lastName = input("Enter last name: ");
+			String firstName  = input("Enter first name: ");
+			String email = input("Enter email: ");
+			int phoneNo = Integer.valueOf(input("Enter phone number: ")).intValue();
+			Member member = library.addMember(lastName, firstName, email, phoneNo);
+			output("\n" + member + "\n");
+			
 		} catch (NumberFormatException e) {
 		    output("\nInvalid phone number\n");
 		}

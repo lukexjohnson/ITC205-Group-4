@@ -4,12 +4,12 @@ public class PayFineControl {
 	
 	private PayFineUI ui;
 	private ControlState state;
-	private library library;
-	private member member;
+	private Library library;
+	private Member member;
 
 
 	public PayFineControl() {
-		this.library = library.INSTANCE();
+		this.library = library.getInstance();
 		state = ControlState.INITIALISED;
 	}
 	
