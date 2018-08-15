@@ -1,9 +1,7 @@
 public class FixBookControl {
 
     // File ready for Static review
-    private enum ControlState {
-        INITIALISED, READY, FIXING
-    };
+    private enum ControlState {INITIALISED, READY, FIXING};
 
     private ControlState state;
     private FixBookUI ui;
@@ -18,7 +16,8 @@ public class FixBookControl {
     
     public void setUI(FixBookUI ui) {
         if (!state.equals(ControlState.INITIALISED)) {
-            throw new RuntimeException("FixBookControl:" + " cannot call setUI except in INITIALISED state");
+            throw new RuntimeException("FixBookControl:"
+        + " cannot call setUI except in INITIALISED state");
         }
         this.ui = ui;
         ui.setState(FixBookUI.UiState.READY);
@@ -28,7 +27,8 @@ public class FixBookControl {
     
     public void bookScanned(int bookId) {
         if (!state.equals(ControlState.READY)) {
-            throw new RuntimeException("FixBookControl:" + " cannot call bookScanned except in READY state");
+            throw new RuntimeException("FixBookControl:" 
+        + " cannot call bookScanned except in READY state");
         }
         currentBook = library.getBook(bookId);
 

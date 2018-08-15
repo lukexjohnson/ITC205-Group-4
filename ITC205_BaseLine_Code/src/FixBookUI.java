@@ -3,14 +3,12 @@ import java.util.Scanner;
 //File ready for Static review
 public class FixBookUI {
 
-    public static enum UiState {
-        INITIALISED, READY, FIXING, COMPLETED
-    };
+    public static enum UiState {INITIALISED, READY, FIXING, COMPLETED};
 
-    
     private FixBookControl control;
     private Scanner input;
     private UiState state;
+
 
     public FixBookUI(FixBookControl control) {
         this.control = control;
@@ -19,12 +17,12 @@ public class FixBookUI {
         control.setUI(this);
     }
 
-    
+
     public void setState(UiState state) {
         this.state = state;
     }
 
-    
+
     public void runFixBook() {
         displayOutputMessage("Fix Book Use Case UI\n");
 
@@ -66,18 +64,18 @@ public class FixBookUI {
         }
     }
 
-    
+
     private String displayInputMessage(String prompt) {
         System.out.print(prompt);
         return input.nextLine();
     }
 
-    
+
     private void displayOutputMessage(Object object) {
         System.out.println(object);
     }
 
-    
+
     public void displayMessage(Object object) {
         displayOutputMessage(object);
     }
