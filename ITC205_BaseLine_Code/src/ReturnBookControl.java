@@ -28,13 +28,12 @@ public class ReturnBookControl {
 		if (!state.equals(ReturnBookControlState.READY)) {
 			throw new RuntimeException("ReturnBookControl: cannot call bookScanned except in READY state");
 		}	
-		book currentBook = library.getBook(bookId);
-		
+		Book currentBook = library.getBook(bookId);
 		if (currentBook == null) {
 			ui.display("Invalid Book Id");
 			return;
 		}
-		if (!currentBook.On_loan()) {
+		if (!currentBook.isOnLoan()) {
 			ui.display("Book has not been borrowed");
 			return;
 		}		

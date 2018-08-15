@@ -8,13 +8,14 @@ public class Loan implements Serializable {
 	public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };
 	
 	private int loanID;
-	private book book;
 	private Member member;
+	private Book book;
 	private Date dueDate;
 	private LoanState state;
 
-	
-	public Loan(int loanId, book book, Member member, Date dueDate) {
+
+	public Loan(int loanId, Book book, Member member, Date dueDate) {
+
 		this.loanID = loanId;
 		this.book = book;
 		this.member = member;
@@ -53,8 +54,8 @@ public class Loan implements Serializable {
 		buildString.append("Loan:  ").append(loanID).append("\n")
 		  .append("  Borrower ").append(member.getMemberId()).append(" : ")
 		  .append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
-		  .append("  Book ").append(book.ID()).append(" : " )
-		  .append(book.Title()).append("\n")
+		  .append("  Book ").append(book.id()).append(" : " )
+		  .append(book.title()).append("\n")
 		  .append("  DueDate: ").append(simpleDateFormat.format(dueDate)).append("\n")
 		  .append("  State: ").append(state);		
 		return buildString.toString();
@@ -66,7 +67,7 @@ public class Loan implements Serializable {
 	}
 
 
-	public book getBook() {
+	public Book getBook() {
 		return book;
 	}
 
