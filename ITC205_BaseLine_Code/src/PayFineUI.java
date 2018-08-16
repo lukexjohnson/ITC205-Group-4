@@ -5,7 +5,6 @@ public class PayFineUI {
 
     public static enum UiState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
-
     private PayFineControl control;
     private Scanner input;
     private UiState state;

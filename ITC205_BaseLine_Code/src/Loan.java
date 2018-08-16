@@ -8,7 +8,6 @@ public class Loan implements Serializable {
 
     public static enum LoanState { CURRENT, OVER_DUE, DISCHARGED };
 
-
     private int loanId;
     private Member member;
     private Book book;
@@ -52,11 +51,15 @@ public class Loan implements Serializable {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
         StringBuilder buildString = new StringBuilder();
-        buildString.append("Loan:  ").append(loanId).append("\n").append("  Borrower ").append(member.getMemberId())
-                .append(" : ").append(member.getLastName()).append(", ").append(member.getFirstName()).append("\n")
-                .append("  Book ").append(book.getBookId()).append(" : ").append(book.getTitle()).append("\n")
-                .append("  DueDate: ").append(simpleDateFormat.format(dueDate)).append("\n").append("  State: ")
-                .append(state);
+        buildString.append("Loan:  ").append(loanId).append("\n").append("  Borrower ")
+            .append(member.getMemberId())
+            .append(" : ").append(member.getLastName()).append(", ")
+                .append(member.getFirstName()).append("\n")
+            .append("  Book ").append(book.getBookId()).append(" : ").append(book.getTitle())
+                .append("\n")
+            .append("  DueDate: ").append(simpleDateFormat.format(dueDate)).append("\n")
+                .append("  State: ")
+            .append(state);
         return buildString.toString();
     }
 

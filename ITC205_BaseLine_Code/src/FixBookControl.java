@@ -18,7 +18,7 @@ public class FixBookControl {
     public void setUI(FixBookUI ui) {
         if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("FixBookControl:"
-        + " cannot call setUI except in INITIALISED state");
+                + " cannot call setUI except in INITIALISED state");
         }
         this.ui = ui;
         ui.setState(FixBookUI.UiState.READY);
@@ -32,7 +32,6 @@ public class FixBookControl {
         + " cannot call bookScanned except in READY state");
         }
         currentBook = library.getBook(bookId);
-
         if (currentBook == null) {
             ui.displayMessage("Invalid bookId");
             return;
