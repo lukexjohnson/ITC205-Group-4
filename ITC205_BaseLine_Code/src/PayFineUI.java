@@ -3,14 +3,13 @@ import java.util.Scanner;
 //File ready for Static review
 public class PayFineUI {
 
-    public static enum UiState {
-        INITIALISED, READY, PAYING, COMPLETED, CANCELLED
-    };
+    public static enum UiState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
-    
+
     private PayFineControl control;
     private Scanner input;
     private UiState state;
+
 
     public PayFineUI(PayFineControl control) {
         this.control = control;
@@ -19,12 +18,12 @@ public class PayFineUI {
         control.setUI(this);
     }
 
-    
+
     public void setState(UiState state) {
         this.state = state;
     }
 
-    
+
     public void runPayFine() {
         displayOutputMessage("Pay Fine Use Case UI\n");
 
@@ -75,12 +74,11 @@ public class PayFineUI {
             default:
                 displayOutputMessage("Unhandled state");
                 throw new RuntimeException("FixBookUI : unhandled state :" + state);
-
             }
         }
     }
 
-    
+
     private String displayInputMessage(String prompt) {
         System.out.print(prompt);
         return input.nextLine();

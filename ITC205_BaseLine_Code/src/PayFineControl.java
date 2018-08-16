@@ -52,7 +52,8 @@ public class PayFineControl {
 
     public double payFine(double amount) {
         if (!state.equals(ControlState.PAYING)) {
-            throw new RuntimeException("PayFineControl:" + " cannot call payFine except in PAYING state");
+            throw new RuntimeException("PayFineControl:" 
+                + " cannot call payFine except in PAYING state");
         }
         double change = member.payFine(amount);
         if (change > 0) {

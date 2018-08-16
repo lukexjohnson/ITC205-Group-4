@@ -8,6 +8,7 @@ public class FixBookControl {
     private Library library;
     private Book currentBook;
 
+
     public FixBookControl() {
         this.library = library.getInstance();
         state = ControlState.INITIALISED;
