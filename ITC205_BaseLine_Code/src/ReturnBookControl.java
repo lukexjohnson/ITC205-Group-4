@@ -1,23 +1,25 @@
+//Luke: Ready for static review
+
 public class ReturnBookControl {
-	
-	private enum ReturnBookControlState { INITIALISED, READY, INSPECTING };
 
-	private ReturnBookUI ui;
-	private ReturnBookControlState state;
-	private Library library;
-	private Loan currentLoan;
+    private enum ReturnBookControlState { INITIALISED, READY, INSPECTING };
 
-	
-	public ReturnBookControl() {
-		this.library = library.getInstance();
-		state = ReturnBookControlState.INITIALISED;
-	}
+    private ReturnBookUI ui;
+    private ReturnBookControlState state;
+    private Library library;
+    private Loan currentLoan;
 
 	
+    public ReturnBookControl() {
+        this.library = library.getInstance();
+        state = ReturnBookControlState.INITIALISED;
+    }
+
+
 	public void setUI(ReturnBookUI ui) {
-		if (!state.equals(ReturnBookControlState.INITIALISED)) {
-			throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
-		}	
+        if (!state.equals(ReturnBookControlState.INITIALISED)) {
+            throw new RuntimeException("ReturnBookControl: cannot call setUI except in INITIALISED state");
+		}
 		this.ui = ui;
 		ui.setState(ReturnBookUI.UIState.READY);
 		state = ReturnBookControlState.READY;		

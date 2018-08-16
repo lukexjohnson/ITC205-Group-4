@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+//Ready for static review
+
 
 public class Main {
 

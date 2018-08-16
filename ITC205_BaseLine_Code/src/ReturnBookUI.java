@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+//Luke: Ready for static review
 
 public class ReturnBookUI {
 

@@ -1,5 +1,5 @@
 import java.io.Serializable;
-
+//Luke: Ready for static review
 
 @SuppressWarnings("serial")
 public class Book implements Serializable {
