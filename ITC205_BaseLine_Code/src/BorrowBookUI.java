@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+//file ready for static review
 
 public class BorrowBookUI {
 	

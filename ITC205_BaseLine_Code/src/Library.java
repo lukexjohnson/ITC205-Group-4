@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//file ready for static review
 
 @SuppressWarnings("serial")
 public class Library implements Serializable {
