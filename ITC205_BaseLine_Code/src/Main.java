@@ -1,5 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+//Ready for static review
+
 
 public class Main {
 
@@ -12,11 +14,13 @@ public class Main {
     private static String getMenu() {
         StringBuilder buildString = new StringBuilder();
 
-        buildString.append("\nLibrary Main Menu\n\n").append("  M  : add member\n").append("  LM : list members\n")
-                .append("\n").append("  B  : add book\n").append("  LB : list books\n").append("  FB : fix books\n")
-                .append("\n").append("  L  : take out a loan\n").append("  R  : return a loan\n")
-                .append("  LL : list loans\n").append("\n").append("  P  : pay fine\n").append("\n")
-                .append("  T  : increment date\n").append("  Q  : quit\n").append("\n").append("Choice : ");
+        buildString.append("\nLibrary Main Menu\n\n").append("  M  : add member\n")
+            .append("  LM : list members\n").append("\n").append("  B  : add book\n")
+            .append("  LB : list books\n").append("  FB : fix books\n").append("\n")
+            .append("  L  : take out a loan\n").append("  R  : return a loan\n")
+            .append("  LL : list loans\n").append("\n").append("  P  : pay fine\n")
+            .append("\n").append("  T  : increment date\n").append("  Q  : quit\n")
+            .append("\n").append("Choice : ");
 
         return buildString.toString();
     }
@@ -25,7 +29,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             takeInput = new Scanner(System.in);
-            library = library.getInstance(); // change library.INSTANCE to Library.INSTANCE
+            library = Library.getInstance();
             calendar = Calendar.getInstance();
             simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -39,9 +43,9 @@ public class Main {
 
             libraryMenu = getMenu();
 
-            boolean e = false;
+            boolean exception = false;
 
-            while (!e) {
+            while (!exception) {
 
                 output("\n" + simpleDateFormat.format(calendar.Date()));
                 String c = input(libraryMenu);
@@ -89,7 +93,7 @@ public class Main {
                     break;
 
                 case "Q":
-                    e = true;
+                    exception = true;
                     break;
 
                 default:
@@ -99,8 +103,8 @@ public class Main {
 
                 Library.saveToLibraryFile();
             }
-        } catch (RuntimeException e) {
-            output(e);
+        } catch (RuntimeException exception) {
+            output(exception);
         }
         output("\nEnded\n");
     }
@@ -118,13 +122,14 @@ public class Main {
         }
     }
 
-    
+
     private static void listBooks() {
         output("");
         for (Book book : library.getBooks()) {
             output(book + "\n");
         }
     }
+
 
     private static void listMembers() {
         output("");
@@ -140,7 +145,7 @@ public class Main {
 
 
     private static void returnBook() {
-        new ReturnBookUI(new ReturnBookControl()).run();
+        new ReturnBookUI(new ReturnBookControl()).runReturnBook();
     }
 
 
@@ -156,7 +161,7 @@ public class Main {
             library.checkCurrentLoans();
             output(simpleDateFormat.format(calendar.Date()));
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
             output("\nInvalid number of days\n");
         }
     }
@@ -180,15 +185,17 @@ public class Main {
             Member member = library.addMember(lastName, firstName, email, phoneNo);
             output("\n" + member + "\n");
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
             output("\nInvalid phone number\n");
         }
     }
+
 
     private static String input(String prompt) {
         System.out.print(prompt);
         return takeInput.nextLine();
     }
+
 
     private static void output(Object outputObject) {
         System.out.println(outputObject);
