@@ -34,8 +34,8 @@ public class Calendar {
             libraryCalendar.set(java.util.Calendar.SECOND, 0);  
             libraryCalendar.set(java.util.Calendar.MILLISECOND, 0);
         }
-        catch (Exception e) {
-        throw new RuntimeException(e);
+        catch (Exception exception) {
+        throw new RuntimeException(exception);
          }
 	}
 
