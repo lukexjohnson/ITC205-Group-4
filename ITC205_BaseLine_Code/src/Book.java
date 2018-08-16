@@ -41,7 +41,7 @@ public class Book implements Serializable {
 	}
 	
 	
-	public String title() {
+	public String getTitle() {
 		return title;
 	}
 

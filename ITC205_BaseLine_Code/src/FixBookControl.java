@@ -1,7 +1,7 @@
 public class FixBookControl {
 
     // File ready for Static review
-    private enum ControlState {INITIALISED, READY, FIXING};
+    private enum ControlState { INITIALISED, READY, FIXING };
 
     private ControlState state;
     private FixBookUI ui;
@@ -13,7 +13,7 @@ public class FixBookControl {
         state = ControlState.INITIALISED;
     }
 
-    
+
     public void setUI(FixBookUI ui) {
         if (!state.equals(ControlState.INITIALISED)) {
             throw new RuntimeException("FixBookControl:"
@@ -24,7 +24,7 @@ public class FixBookControl {
         state = ControlState.READY;
     }
 
-    
+
     public void bookScanned(int bookId) {
         if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("FixBookControl:" 
@@ -46,7 +46,7 @@ public class FixBookControl {
         state = ControlState.FIXING;
     }
 
-    
+
     public void fixBook(boolean fix) {
         if (!state.equals(ControlState.FIXING)) {
             throw new RuntimeException("FixBookControl:" + " cannot call fixBook except in FIXING state");
@@ -59,7 +59,7 @@ public class FixBookControl {
         state = ControlState.READY;
     }
 
-    
+
     public void scanningComplete() {
         if (!state.equals(ControlState.READY)) {
             throw new RuntimeException("FixBookControl: " + "cannot call scanningComplete except in READY state");
