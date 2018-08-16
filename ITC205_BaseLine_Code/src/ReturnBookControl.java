@@ -11,7 +11,7 @@ public class ReturnBookControl {
 
 	
     public ReturnBookControl() {
-        this.library = library.getInstance();
+        this.library = Library.getInstance();
         state = ReturnBookControlState.INITIALISED;
     }
 

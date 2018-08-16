@@ -27,7 +27,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             takeInput = new Scanner(System.in);
-            library = library.getInstance(); // change library.INSTANCE to Library.INSTANCE
+            library = Library.getInstance();
             calendar = Calendar.getInstance();
             simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
