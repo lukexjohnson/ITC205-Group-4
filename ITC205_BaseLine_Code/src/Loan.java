@@ -52,14 +52,11 @@ public class Loan implements Serializable {
 
         StringBuilder buildString = new StringBuilder();
         buildString.append("Loan:  ").append(loanId).append("\n").append("  Borrower ")
-            .append(member.getMemberId())
-            .append(" : ").append(member.getLastName()).append(", ")
-                .append(member.getFirstName()).append("\n")
-            .append("  Book ").append(book.getBookId()).append(" : ").append(book.getTitle())
-                .append("\n")
+            .append(member.getMemberId()).append(" : ").append(member.getLastName()).append(", ")
+            .append(member.getFirstName()).append("\n").append("  Book ").append(book.getBookId())
+            .append(" : ").append(book.getTitle()).append("\n")
             .append("  DueDate: ").append(simpleDateFormat.format(dueDate)).append("\n")
-                .append("  State: ")
-            .append(state);
+            .append("  State: ").append(state);
         return buildString.toString();
     }
 
