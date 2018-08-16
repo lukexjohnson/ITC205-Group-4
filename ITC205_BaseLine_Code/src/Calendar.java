@@ -9,7 +9,7 @@ public class Calendar {
 
 
     private Calendar() {
-	    libraryCalendar = java.util.Calendar.getInstance();
+        libraryCalendar = java.util.Calendar.getInstance();
     }
 
 
@@ -37,7 +37,7 @@ public class Calendar {
         catch (Exception exception) {
         throw new RuntimeException(exception);
          }
-	}
+    }
 
 
     public synchronized Date Date() {
@@ -54,7 +54,7 @@ public class Calendar {
     }
 
 
-	public synchronized Date getDueDate(int loanPeriod) {
+    public synchronized Date getDueDate(int loanPeriod) {
         Date now = Date();
         libraryCalendar.add(java.util.Calendar.DATE, loanPeriod);
         Date dueDate = libraryCalendar.getTime();
