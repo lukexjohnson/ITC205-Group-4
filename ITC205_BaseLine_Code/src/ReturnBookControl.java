@@ -9,7 +9,7 @@ public class ReturnBookControl {
     private Library library;
     private Loan currentLoan;
 
-	
+
     public ReturnBookControl() {
         this.library = Library.getInstance();
         state = ReturnBookControlState.INITIALISED;
@@ -22,7 +22,7 @@ public class ReturnBookControl {
         }
         this.ui = ui;
         ui.setState(ReturnBookUI.UIState.READY);
-        state = ReturnBookControlState.READY;		
+        state = ReturnBookControlState.READY;
     }
 
 
@@ -67,10 +67,10 @@ public class ReturnBookControl {
     public void dischargeLoan(boolean isDamaged) {
         if (!state.equals(ReturnBookControlState.INSPECTING)) {
             throw new RuntimeException("ReturnBookControl: cannot call dischargeLoan except in INSPECTING state");
-        }	
+        }
         library.dischargeLoan(currentLoan, isDamaged);
         currentLoan = null;
         ui.setState(ReturnBookUI.UIState.READY);
-        state = ReturnBookControlState.READY;				
-	}
+        state = ReturnBookControlState.READY;
+    }
 }

@@ -30,8 +30,8 @@ public class Calendar {
         try {
             libraryCalendar.setTime(date);
             libraryCalendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
-            libraryCalendar.set(java.util.Calendar.MINUTE, 0);  
-            libraryCalendar.set(java.util.Calendar.SECOND, 0);  
+            libraryCalendar.set(java.util.Calendar.MINUTE, 0);
+            libraryCalendar.set(java.util.Calendar.SECOND, 0);
             libraryCalendar.set(java.util.Calendar.MILLISECOND, 0);
         }
         catch (Exception exception) {
@@ -43,8 +43,8 @@ public class Calendar {
     public synchronized Date Date() {
         try {
             libraryCalendar.set(java.util.Calendar.HOUR_OF_DAY, 0);
-            libraryCalendar.set(java.util.Calendar.MINUTE, 0);  
-            libraryCalendar.set(java.util.Calendar.SECOND, 0);  
+            libraryCalendar.set(java.util.Calendar.MINUTE, 0);
+            libraryCalendar.set(java.util.Calendar.SECOND, 0);
             libraryCalendar.set(java.util.Calendar.MILLISECOND, 0);
             return libraryCalendar.getTime();
         }
