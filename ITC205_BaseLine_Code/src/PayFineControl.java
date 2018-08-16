@@ -1,14 +1,13 @@
 public class PayFineControl {
 
     // File ready for Static review
-    private enum ControlState {
-        INITIALISED, READY, PAYING, COMPLETED, CANCELLED
-    };
+    private enum ControlState { INITIALISED, READY, PAYING, COMPLETED, CANCELLED };
 
     private PayFineUI ui;
     private ControlState state;
     private Library library;
     private Member member;
+
 
     public PayFineControl() {
         this.library = library.getInstance();
@@ -18,7 +17,8 @@ public class PayFineControl {
 
     public void setUI(PayFineUI ui) {
         if (!state.equals(ControlState.INITIALISED)) {
-            throw new RuntimeException("PayFineControl:" + " cannot call setUI except in INITIALISED state");
+            throw new RuntimeException("PayFineControl:"
+                + " cannot call setUI except in INITIALISED state");
         }
         this.ui = ui;
         ui.setState(PayFineUI.UiState.READY);
@@ -28,7 +28,8 @@ public class PayFineControl {
 
     public void cardSwiped(int memberId) {
         if (!state.equals(ControlState.READY)) {
-            throw new RuntimeException("PayFineControl:" + " cannot call cardSwiped except in READY state");
+            throw new RuntimeException("PayFineControl:"
+                + " cannot call cardSwiped except in READY state");
         }
         member = library.getMember(memberId);
 
