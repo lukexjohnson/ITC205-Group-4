@@ -14,11 +14,13 @@ public class Main {
     private static String getMenu() {
         StringBuilder buildString = new StringBuilder();
 
-        buildString.append("\nLibrary Main Menu\n\n").append("  M  : add member\n").append("  LM : list members\n")
-            .append("\n").append("  B  : add book\n").append("  LB : list books\n").append("  FB : fix books\n")
-            .append("\n").append("  L  : take out a loan\n").append("  R  : return a loan\n")
-            .append("  LL : list loans\n").append("\n").append("  P  : pay fine\n").append("\n")
-            .append("  T  : increment date\n").append("  Q  : quit\n").append("\n").append("Choice : ");
+        buildString.append("\nLibrary Main Menu\n\n").append("  M  : add member\n")
+            .append("  LM : list members\n").append("\n").append("  B  : add book\n")
+            .append("  LB : list books\n").append("  FB : fix books\n").append("\n")
+            .append("  L  : take out a loan\n").append("  R  : return a loan\n")
+            .append("  LL : list loans\n").append("\n").append("  P  : pay fine\n")
+            .append("\n").append("  T  : increment date\n").append("  Q  : quit\n")
+            .append("\n").append("Choice : ");
 
         return buildString.toString();
     }
