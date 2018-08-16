@@ -36,12 +36,12 @@ public class Book implements Serializable {
 	}
 
 	
-	public Integer id() {
+	public Integer getBookId() {
 		return id;
 	}
 	
 	
-	public String title() {
+	public String getTitle() {
 		return title;
 	}
 
