@@ -36,7 +36,7 @@ public class BorrowBookUI {
     }
 
 
-    public void run() {
+    public void runBorrowBook() {
         output("Borrow Book Use Case UI\n");
 
         while (true) {
