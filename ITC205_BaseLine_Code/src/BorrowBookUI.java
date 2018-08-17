@@ -26,7 +26,7 @@ public class BorrowBookUI {
     }
 
 
-    private void output(Object object) {
+    private void displayOutputMessage(Object object) {
         System.out.println(object);
     }
 
@@ -37,14 +37,14 @@ public class BorrowBookUI {
 
 
     public void runBorrowBook() {
-        output("Borrow Book Use Case UI\n");
+        displayOutputMessage("Borrow Book Use Case UI\n");
 
         while (true) {
 
             switch (state) {
 
             case CANCELLED:
-                output("Borrowing Cancelled");
+                displayOutputMessage("Borrowing Cancelled");
                 return;
 
             case READY:
@@ -57,7 +57,7 @@ public class BorrowBookUI {
                     int memberId = Integer.valueOf(memberStr).intValue();
                     control.cardSwiped(memberId);
                 } catch (NumberFormatException exception) {
-                    output("Invalid Member Id");
+                    displayOutputMessage("Invalid Member Id");
                 }
                 break;
 
@@ -77,7 +77,7 @@ public class BorrowBookUI {
                     control.bookScanned(bookId);
 
                 } catch (NumberFormatException exception) {
-                    output("Invalid Book Id");
+                    displayOutputMessage("Invalid Book Id");
                 }
                 break;
 
@@ -92,11 +92,11 @@ public class BorrowBookUI {
                 break;
 
             case COMPLETED:
-                output("Borrowing Completed");
+                displayOutputMessage("Borrowing Completed");
                 return;
 
             default:
-                output("Unhandled state");
+                displayOutputMessage("Unhandled state");
                 throw new RuntimeException("BorrowBookUI : unhandled state :" + state);
             }
         }
@@ -104,6 +104,6 @@ public class BorrowBookUI {
 
 
     public void display(Object object) {
-        output(object);
+        displayOutputMessage(object);
     }
 }
