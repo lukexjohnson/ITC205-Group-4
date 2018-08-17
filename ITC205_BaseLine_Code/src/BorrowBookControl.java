@@ -13,7 +13,6 @@ public class BorrowBookControl {
     private Member member;
     private ControlState state;
     private Book currentBook;
-    
     private List<Book> pendingBooks;
     private List<Loan> completedLoans;
 
