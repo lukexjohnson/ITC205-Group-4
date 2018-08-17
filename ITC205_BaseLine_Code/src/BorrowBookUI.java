@@ -103,7 +103,7 @@ public class BorrowBookUI {
     }
 
 
-    public void display(Object object) {
+    public void displayMessage(Object object) {
         displayOutputMessage(object);
     }
 }
