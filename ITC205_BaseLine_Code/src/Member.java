@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+//file ready for static review
 
 @SuppressWarnings("serial")
 public class Member implements Serializable {
